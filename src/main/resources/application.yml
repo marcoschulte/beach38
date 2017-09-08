@@ -1,0 +1,15 @@
+---
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/beach38?verifyServerCertificate=false&useSSL=true
+    username: root
+    password: root
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: false
+    properties:
+      hibernate.format_sql: true
+    generate-ddl: true
+
