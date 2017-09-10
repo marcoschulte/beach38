@@ -60,10 +60,13 @@ public class BookrCommandLineRunner implements CommandLineRunner {
               log.warn("Booking of week {} unsuccessful", week);
 
             } else {
-              log.info("Booked week {}", week);
+              log.debug("Booked week {}", week);
               try {
                 weekRepository.markAsBooked(week);
+              } catch (Exception e) {
+                log.error("Could not mark week as booked", e);
               } finally {
+                // End this thread, don't book week again
                 return null;
               }
             }

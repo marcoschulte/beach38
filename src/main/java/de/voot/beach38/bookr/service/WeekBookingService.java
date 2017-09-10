@@ -40,15 +40,21 @@ public class WeekBookingService {
     this.bookingService = bookingService;
 
     preferences = Arrays.asList(
-      Preference.builder().dayOfWeek(DayOfWeek.TUESDAY).time(LocalTime.of(17, 00)).build(),
       Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(19, 00)).build(),
-      Preference.builder().dayOfWeek(DayOfWeek.FRIDAY).time(LocalTime.of(19, 00)).build(),
-      Preference.builder().dayOfWeek(DayOfWeek.SATURDAY).time(LocalTime.of(19, 00)).build()
+      Preference.builder().dayOfWeek(DayOfWeek.MONDAY).time(LocalTime.of(19, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(21, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.MONDAY).time(LocalTime.of(21, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.WEDNESDAY).time(LocalTime.of(19, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.WEDNESDAY).time(LocalTime.of(21, 00)).build()
     );
   }
 
   public boolean bookWeek(LocalDate week, String phpSessionId) throws IOException {
     Set<Court> freeCourts = freeCourtService.freeCourts(week, phpSessionId);
+
+    if (CollectionUtils.isEmpty(freeCourts)) {
+      log.warn("No free courts, all blocked or not logged in in week {}", week);
+    }
 
     for (Preference preference : preferences) {
       List<Court> matchingCourts = freeCourts.stream()
@@ -61,7 +67,7 @@ public class WeekBookingService {
         log.debug("Matching courts for week {} are {}", week, matchingCourts);
 
         for (Court matchingCourt : matchingCourts) {
-          boolean success = bookingService.book(matchingCourt);
+          boolean success = bookingService.book(matchingCourt, phpSessionId);
 
           log.debug("Booking of court {} was {}", matchingCourt, success);
 
