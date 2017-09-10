@@ -1,5 +1,8 @@
 ---
 
+bookr:
+  dry-run: true
+
 spring:
   datasource:
     url: jdbc:mysql://localhost/beach38?verifyServerCertificate=false&useSSL=true

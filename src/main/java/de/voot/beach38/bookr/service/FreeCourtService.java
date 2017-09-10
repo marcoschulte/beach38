@@ -13,6 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 @Slf4j
@@ -33,6 +34,16 @@ public class FreeCourtService {
     Set<Court> freeCourts = new HashSet<>();
 
     Elements courts = doc.select(".week-box");
+    Elements blocked = doc.select(".week-box.blocked");
+
+    Assert.state(courts.size() > 0, "No Courts in week " + week);
+
+    double blockedPercentage = (double) blocked.size() / courts.size();
+    if (blockedPercentage > 0.2) {
+      log.warn("{}% courts blocked in week {}, skipping week", blockedPercentage * 100, week);
+      return freeCourts;
+    }
+
     courts.forEach(c -> {
       String onclick = c.attr("onclick");
       if (StringUtils.hasText(onclick)) {
