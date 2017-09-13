@@ -31,11 +31,11 @@ public class WeekRepository {
 
     // Starte Dienstags, in der WS gibt es Dienstags keine Feiertage. Feiertage zeigen keinen einzigen Court an, auch nicht in der
     // Wochenansicht
-    /*LocalDate startInclusive = LocalDate.of(2017, 10, 3);
-    LocalDate endExclusive = LocalDate.of(2018, 5, 8);*/
+    LocalDate startInclusive = LocalDate.of(2017, 10, 3);
+    LocalDate endExclusive = LocalDate.of(2018, 5, 1);
 
-    LocalDate startInclusive = LocalDate.of(2017, 9, 18);
-    LocalDate endExclusive = LocalDate.of(2017, 9, 26);
+    /*LocalDate startInclusive = LocalDate.of(2017, 9, 18);
+    LocalDate endExclusive = LocalDate.of(2017, 9, 26);*/
 
     LocalDate week = startInclusive;
     while (week.isBefore(endExclusive)) {

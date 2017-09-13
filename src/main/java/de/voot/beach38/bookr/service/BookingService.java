@@ -22,7 +22,7 @@ public class BookingService {
 
   public boolean book(Court court, String phpSessionId) throws IOException {
     if (dryRun) {
-      log.warn("Dry run: booking {}", court);
+      log.warn("DRY RUN: booking {} {}", court, court.getDate().getDayOfWeek());
       return true;
     }
 
@@ -51,7 +51,7 @@ public class BookingService {
       return false;
     }
 
-    log.info("Booked court {}", court);
+    log.info("Booked court {} {}", court, court.getDate().getDayOfWeek());
     return true;
   }
 }

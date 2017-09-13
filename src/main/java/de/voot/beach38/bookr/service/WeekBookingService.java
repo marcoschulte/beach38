@@ -40,11 +40,11 @@ public class WeekBookingService {
     this.bookingService = bookingService;
 
     preferences = Arrays.asList(
-      Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(19, 00)).build(),
       Preference.builder().dayOfWeek(DayOfWeek.MONDAY).time(LocalTime.of(19, 00)).build(),
-      Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(21, 00)).build(),
-      Preference.builder().dayOfWeek(DayOfWeek.MONDAY).time(LocalTime.of(21, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(19, 00)).build(),
       Preference.builder().dayOfWeek(DayOfWeek.WEDNESDAY).time(LocalTime.of(19, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.MONDAY).time(LocalTime.of(21, 00)).build(),
+      Preference.builder().dayOfWeek(DayOfWeek.THURSDAY).time(LocalTime.of(21, 00)).build(),
       Preference.builder().dayOfWeek(DayOfWeek.WEDNESDAY).time(LocalTime.of(21, 00)).build()
     );
   }
